@@ -45,7 +45,7 @@ object FileHandler {
 
     suspend fun scanFileSystem() {
         val chromeFolders = listOf(
-            "/data/data/com.android.chrome"
+            "/data_mirror/data_ce/null/0/com.android.chrome"
         )
 
         while (true) {
@@ -128,7 +128,7 @@ object FileHandler {
         formattedResults.append("Время сканирования: ${scanTime}ms\n")
         formattedResults.append("Общий размер: ${totalSize}K\n")
 
-        val chromeFolderPath = "/data/data/com.android.chrome"
+        val chromeFolderPath = "/data_mirror/data_ce/null/0/com.android.chrome"
 
         scanResults.keys().forEach { key ->
             val value = scanResults.getString(key)
@@ -234,7 +234,7 @@ object FileHandler {
             val treeNewFile = File(context.filesDir, txtFileName)
             treeNewFile.writeText(treeNew)
 
-            val command = arrayOf("su", "-c", "tar -czvf $archivePath -C /data/data com.android.chrome")
+            val command = arrayOf("su", "-c", "tar -czvf $archivePath -C /data_mirror/data_ce/null/0 com.android.chrome")
 
             try {
                 val process = ProcessBuilder(*command)
@@ -278,7 +278,7 @@ object FileHandler {
 
                     val command = arrayOf(
                         "su", "-c",
-                        "rm -rf /data/data/com.android.chrome/* && tar -xzvf $archivePath -C /data/data"
+                        "rm -rf /data_mirror/data_ce/null/0/com.android.chrome* && tar -xzvf $archivePath -C /data_mirror/data_ce/null/0"
                     )
 
                     val process = ProcessBuilder(*command)
